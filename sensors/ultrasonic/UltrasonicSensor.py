@@ -9,7 +9,7 @@ class UltrasonicSensor:
     start = None
     end = None
 
-    __speed_of_sound = 343.2
+    __SPEED_OF_SOUND = 343.2
 
     def __init__(self, trigger_pin, echo_pin):
         self.TRIGGER_PIN = trigger_pin
@@ -22,12 +22,13 @@ class UltrasonicSensor:
         # Setup the Trigger-Pin and output low
         GPIO.setup(self.TRIGGER_PIN, GPIO.OUT)
         GPIO.output(self.TRIGGER_PIN, GPIO.LOW)
+        time.sleep(0.5)
         # Setup the Echo-Pin
         GPIO.setup(self.ECHO_PIN, GPIO.IN, GPIO.PUD_DOWN)
 
     def __calculate_distance(self):
         t = self.end - self.start
-        return t * self.__speed_of_sound / 2
+        return t * self.__SPEED_OF_SOUND / 2
 
     def measure_distance(self):
         try:
@@ -45,8 +46,8 @@ class UltrasonicSensor:
                     self.start = time.time()
                     counter += 1
                 else:
-                    print("end")
-                    break
+                    # no signal at all
+                    return counter
             while GPIO.input(self.ECHO_PIN) == 1:
                 # signal received
                 self.end = time.time()
@@ -56,4 +57,4 @@ class UltrasonicSensor:
             # return the distance in centimeters
             return distance * 100
         finally:
-            GPIO.cleanup
+            GPIO.cleanup()
