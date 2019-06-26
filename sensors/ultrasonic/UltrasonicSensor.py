@@ -18,7 +18,7 @@ class UltrasonicSensor:
     def __setup_pi(self):
         GPIO.setwarnings(False)
         # Setup BCM mode
-        GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BOARD)
         # Setup the Trigger-Pin and output low
         GPIO.setup(self.TRIGGER_PIN, GPIO.OUT)
         GPIO.output(self.TRIGGER_PIN, GPIO.LOW)
