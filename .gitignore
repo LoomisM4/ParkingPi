@@ -126,3 +126,7 @@ dmypy.json
 ### IntelliJ template
 .idea/
 *.iml
+
+# MQTT Settings
+mqtt/Settings.py
+sensors/rfid/MFRC522.py
