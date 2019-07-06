@@ -129,4 +129,6 @@ dmypy.json
 
 # MQTT Settings
 mqtt/Settings.py
+
 sensors/rfid/MFRC522.py
+sensors/rfid/SPI-Py

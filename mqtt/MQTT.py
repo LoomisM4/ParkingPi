@@ -1,13 +1,5 @@
-import paho.mqtt.client as client
-
-from mqtt.Settings import Settings
+from paho.mqtt.publish import single
 
 
-class MQTT:
-    def publish(self, message):
-        settings = Settings()
-        mqtt = client.Client()
-        mqtt.username_pw_set(settings.USERNAME, settings.PASSWORD)
-        mqtt.connect(settings.SERVER, settings.PORT)
-        mqtt.publish(settings.TOPIC, message, 1)
-        mqtt.disconnect()
+def publish(message):
+    single(topic="/smp/spots", payload=message, qos=2, hostname="iot.eclipse.org")
